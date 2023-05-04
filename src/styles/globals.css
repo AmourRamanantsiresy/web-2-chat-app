@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    margin: 0;
+    padding: 0
+}
+
+.transparent {
+    background: rgba(255, 255, 255, 0.13);
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 30px;
+    backdrop-filter: blur(5.7px);
+    -webkit-backdrop-filter: blur(5.7px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 450px;
+    height: 500px;
+    border-radius: 27px;
+    position: relative
+}

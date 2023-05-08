@@ -1,10 +1,13 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getCached } from '../utils';
 
 export const useAuthenticate = () => {
   const { push, pathname } = useRouter();
+  const [isLoading, setLoading] = useState(true);
+
   useEffect(() => {
+    setLoading(true);
     const user = getCached.user();
     if (pathname === null || pathname === '/') {
       if (user === null) {
@@ -24,5 +27,10 @@ export const useAuthenticate = () => {
     ) {
       push('/board');
     }
+    const timeoutId = setTimeout(() => {
+      setLoading(false);
+      clearTimeout(timeoutId);
+    }, 3000);
   }, [pathname, push]);
+  return isLoading;
 };

@@ -5,7 +5,17 @@ type LayoutProps = {
   children: ReactNode | string;
 };
 export const Layout = (props: LayoutProps) => {
-  useAuthenticate();
+  const isLoading = useAuthenticate();
 
-  return <>{props.children}</>;
+  return (
+    <>
+      {isLoading ? (
+        <div className='flex justify-center items-center w-screen h-screen'>
+          Loading ...
+        </div>
+      ) : (
+        props.children
+      )}
+    </>
+  );
 };

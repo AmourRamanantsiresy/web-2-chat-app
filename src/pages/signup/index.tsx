@@ -3,26 +3,14 @@ import { CreateUser } from '@/common/types';
 import { cache } from '@/common/utils';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
-
-const userSignUpDefaultValues: CreateUser = {
-  email: '',
-  password: '',
-  userName: '',
-  confirmPassword: '',
-};
-
-const passwordConfirmValidator = (value: string, user: CreateUser) => {
-  if (value.length === 0) {
-    return 'Ce champ est requis.';
-  } else if (user.password !== value) {
-    return 'Les mots de passe ne corespondent pas';
-  }
-};
+import { SignUpSchema, signUpSchema, userSignUpDefaultValues } from './utils';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const SignInPage = () => {
-  const form = useForm<CreateUser>({
+  const form = useForm<SignUpSchema>({
     defaultValues: userSignUpDefaultValues,
     mode: 'all',
+    resolver: zodResolver(signUpSchema),
   });
 
   const { push } = useRouter();
@@ -51,7 +39,7 @@ const SignInPage = () => {
                 <Input
                   label='Confirm password'
                   name='confirmPassword'
-                  validate={passwordConfirmValidator}
+                  validate={(pass: string) => pass.length > 10 || 'Not enough'}
                 />
               </div>
               <div className='flex justify-end w-full'>

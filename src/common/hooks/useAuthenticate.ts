@@ -30,7 +30,7 @@ export const useAuthenticate = () => {
     const timeoutId = setTimeout(() => {
       setLoading(false);
       clearTimeout(timeoutId);
-    }, 3000);
+    }, 1500);
   }, [pathname, push]);
   return isLoading;
 };

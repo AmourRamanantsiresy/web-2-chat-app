@@ -6,8 +6,6 @@ import { FormProvider, useForm } from 'react-hook-form';
 
 const userSignUpDefaultValues: CreateUser = {
   email: '',
-  firstName: '',
-  lastName: '',
   password: '',
   userName: '',
   confirmPassword: '',
@@ -40,12 +38,13 @@ const SignInPage = () => {
     <Layout>
       <FormProvider {...form}>
         <div className='flex justify-center items-center w-screen h-screen bg-white'>
-          <div className='mx-2 w-screen rounded border border-gray-400 md:w-1/2 lg:w-2/5'>
+          <div className='flex flex-col mx-2 w-screen rounded-2xl border-none item-center md:w-1/2 lg:w-2/5 2xl:1/4'>
             <h1 className='m-8 text-5xl text-center text-black'>SignUp</h1>
-            <form className='px-8 pb-10 rounded' onSubmit={handleSubmit}>
-              <div className='mt-12 mb-4'>
-                <Input label='Last Name' name='lastName' />
-                <Input label='First Name' name='firstName' />
+            <form
+              className='self-center px-8 pb-10 rounded'
+              onSubmit={handleSubmit}
+            >
+              <div className='mt-12 mb-1'>
                 <Input label='Username' name='userName' />
                 <Input label='Email' name='email' />
                 <Input label='Password' name='password' />
@@ -58,7 +57,7 @@ const SignInPage = () => {
               <div className='flex justify-end w-full'>
                 <button
                   type='submit'
-                  className='px-6 py-1 text-white bg-blue-400 rounded hover:bg-blue-500'
+                  className='px-6 py-2 text-white bg-blue-400 rounded hover:bg-blue-500'
                 >
                   Send
                 </button>

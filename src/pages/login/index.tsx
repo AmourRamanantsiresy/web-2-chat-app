@@ -1,59 +1,56 @@
-import { useAuthenticate } from '@/common/hooks';
+import { Input, Layout } from '@/common/components';
+import { CreateUser, LoginUser } from '@/common/types';
+import { cache } from '@/common/utils';
+import { useRouter } from 'next/router';
+import { FormProvider, useForm } from 'react-hook-form';
+
+const userSignInDefaultValues: LoginUser = {
+  email: '',
+  password: '',
+};
 
 const SignInPage = () => {
-  useAuthenticate();
+  const form = useForm<CreateUser>({
+    defaultValues: userSignInDefaultValues,
+    mode: 'all',
+  });
+
+  const { push } = useRouter();
+
+  const handleSubmit = form.handleSubmit((createUser: CreateUser) => {
+    const user = { ...createUser };
+    delete user.confirmPassword;
+    cache.user(user);
+    push('/board');
+  });
+
   return (
-    <>
-      <div className='flex justify-center items-center w-screen h-screen'>
-        <div className='transparent'>
-          <h1 className='m-8 text-5xl text-center text-white'>Login</h1>
-          <form className='px-8 pt-6 pb-8 rounded'>
-            <div className='mt-12 mb-4'>
-              <label
-                className='block mb-2 text-sm font-bold text-white'
-                htmlFor='username'
-              >
-                Username
-              </label>
-              <input
-                className='px-3 py-2 w-full leading-tight text-gray-700 rounded border shadow appearance-none focus:outline-none focus:shadow-outline'
-                id='username'
-                type='text'
-                placeholder='Username'
-              />
-            </div>
-            <div className='mb-6'>
-              <label
-                className='block mb-2 text-sm font-bold text-white'
-                htmlFor='password'
-              >
-                Password
-              </label>
-              <input
-                className='px-3 py-2 mb-3 w-full leading-tight text-gray-700 rounded border shadow appearance-none focus:outline-none focus:shadow-outline'
-                id='password'
-                type='password'
-                placeholder='******************'
-              />
-            </div>
-            <div className='flex justify-between items-center'>
-              <button
-                className='px-4 py-2 font-bold text-white bg-blue-500 rounded hover:bg-blue-700 focus:outline-none focus:shadow-outline'
-                type='button'
-              >
-                Login
-              </button>
-              <a
-                className='inline-block text-sm font-bold text-white align-baseline hover:text-white-800'
-                href='#'
-              >
-                Forgot Password?
-              </a>
-            </div>
-          </form>
+    <Layout>
+      <FormProvider {...form}>
+        <div className='flex justify-center items-center w-screen h-screen bg-white'>
+          <div className='flex flex-col mx-2 w-screen rounded-2xl border-none item-center md:w-1/2 lg:w-2/5 2xl:1/4'>
+            <h1 className='m-8 text-5xl text-center text-black'>Login</h1>
+            <form
+              className='self-center px-8 pb-10 rounded'
+              onSubmit={handleSubmit}
+            >
+              <div className='mt-12 mb-1'>
+                <Input label='Email' name='email' />
+                <Input label='Password' name='password' />
+              </div>
+              <div className='flex justify-end w-full'>
+                <button
+                  type='submit'
+                  className='px-6 py-2 text-white bg-blue-400 rounded hover:bg-blue-500'
+                >
+                  Send
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </>
+      </FormProvider>
+    </Layout>
   );
 };
 

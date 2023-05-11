@@ -8,29 +8,22 @@ export const useAuthenticate = () => {
 
   useEffect(() => {
     setLoading(true);
-    const user = getCached.user();
+    const accessToken = getCached.accessToken();
     if (pathname === null || pathname === '/') {
-      if (user === null) {
-        push('/signup');
+      if (accessToken === null) {
+        push('/login');
       } else {
         push('/board');
       }
-    } else if (
-      pathname !== '/login' &&
-      pathname !== '/signup' &&
-      user === null
-    ) {
-      push('/signup');
-    } else if (
-      (pathname === '/login' || pathname === '/signup') &&
-      user !== null
-    ) {
+    } else if (pathname !== '/login' && pathname !== '/signup' && accessToken === null) {
+      push('/login');
+    } else if ((pathname === '/login' || pathname === '/signup') && accessToken !== null) {
       push('/board');
     }
     const timeoutId = setTimeout(() => {
       setLoading(false);
       clearTimeout(timeoutId);
-    }, 1500);
+    }, 500);
   }, [pathname, push]);
   return isLoading;
 };

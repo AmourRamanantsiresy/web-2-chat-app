@@ -33,7 +33,7 @@ const SignInPage = () => {
               onSubmit={handleSubmit}
             >
               <div className='mt-12 mb-1'>
-                <Input label='Username' name='userName' />
+                <Input label='name' name='name' />
                 <Input label='Email' name='email' />
                 <Input label='Password' name='password' />
                 <Input

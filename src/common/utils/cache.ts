@@ -24,3 +24,7 @@ export const cache = {
   user: (user: User) => cacheJson(userItem, user),
   accessToken: (accessToken = '') => setString(accessTokenItem, accessToken),
 };
+
+export const clearCache = () => {
+  localStorage.clear();
+};

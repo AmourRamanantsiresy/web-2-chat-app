@@ -1,11 +1,25 @@
 import { Layout, SendIcon } from '@/common/components';
+import { authProvider } from '@/providers';
+import { useRouter } from 'next/router';
 
 const Board = () => {
+  const { push } = useRouter();
+
+  const handleLogout = () => {
+    push(authProvider.logout().redirection);
+  };
+
   return (
     <Layout>
       <div className='flex relative flex-col items-center w-screen h-screen'>
         <nav className='flex items-center w-full h-12 bg-blue-500'>
-          <h1 className='ml-3 font-bold'>Slack</h1>
+          <h1 className='ml-3 w-11/12 font-bold'>Slack</h1>
+          <button
+            onClick={handleLogout}
+            className='px-6 py-2 text-white bg-blue-800 rounded-lg shadow-sm hover:bg-blue-900 shadow-blue-500'
+          >
+            Logout
+          </button>
         </nav>
         <div className='p-5 my-7 w-10/12 h-3/4 bg-gray-100 rounded'>
           <h1 className='text-black'>This is the chat room</h1>
@@ -16,11 +30,7 @@ const Board = () => {
             placeholder='12'
           />
           <div className='mr-2'>
-            <SendIcon
-              background='bg-blue-500'
-              color='rgb(59,130,246)'
-              width='20px'
-            />
+            <SendIcon background='bg-blue-500' color='rgb(59,130,246)' width='20px' />
           </div>
         </div>
       </div>

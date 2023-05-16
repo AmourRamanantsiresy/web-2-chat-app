@@ -1,7 +1,7 @@
 import { CreateUser, DomainUser, RestUser } from '@/common/types';
 import { publicRequest } from './request';
 import { LoginUser } from '@/common/types';
-import { cache } from '@/common/utils';
+import { cache, clearCache } from '@/common/utils';
 
 export const authProvider = {
   signUp: async (user: CreateUser) => publicRequest().post('/users', user),
@@ -17,5 +17,9 @@ export const authProvider = {
 
       return { redirection: `/error?code=${status}`, data, authenticate: false };
     }
+  },
+  logout: () => {
+    clearCache();
+    return { redirection: `/login`, data: null, authenticate: false };
   },
 };

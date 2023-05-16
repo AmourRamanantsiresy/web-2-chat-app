@@ -1,4 +1,4 @@
-import { Input, Layout } from '@/common/components';
+import { Button, Input, Layout } from '@/common/components';
 import { CreateUser } from '@/common/types';
 import { cache } from '@/common/utils';
 import { useRouter } from 'next/router';
@@ -41,9 +41,12 @@ const SignInPage = () => {
                 />
               </div>
               <div className='flex justify-end w-full'>
-                <button type='submit' className='px-6 py-2 text-white bg-blue-400 rounded hover:bg-blue-500'>
-                  Send
-                </button>
+                <div className='flex justify-between items-center w-full'>
+                  <span className='text-blue-500 cursor-pointer hover:text-blue-700' onClick={() => push('/login')}>
+                    Already have an account?
+                  </span>{' '}
+                  <Button label='Send' type='submit' />
+                </div>
               </div>
             </form>
           </div>

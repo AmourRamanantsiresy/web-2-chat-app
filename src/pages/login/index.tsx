@@ -48,7 +48,7 @@ const SignInPage = () => {
               </div>
               <div className='flex justify-between items-center w-full'>
                 <span className='text-blue-500 cursor-pointer hover:text-blue-700' onClick={() => push('/signup')}>
-                  Create account?
+                  Create an account?
                 </span>{' '}
                 <Button label='Send' type='submit' />
               </div>

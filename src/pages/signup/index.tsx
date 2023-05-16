@@ -5,6 +5,8 @@ import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SignUpSchema, signUpSchema, userSignUpDefaultValues } from './utils';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { authProvider } from '@/providers';
+import { useGlobalStore } from '@/store/useGlobalStore';
 
 const SignInPage = () => {
   const form = useForm<SignUpSchema>({
@@ -13,13 +15,23 @@ const SignInPage = () => {
     resolver: zodResolver(signUpSchema),
   });
 
+  const { setUser, setErrorMessage } = useGlobalStore();
   const { push } = useRouter();
 
   const handleSubmit = form.handleSubmit((createUser: CreateUser) => {
-    const user = { ...createUser };
-    delete user.confirmPassword;
-    cache.user(user);
-    push('/board');
+    const signUp = async () => {
+      const user = { ...createUser };
+      delete user.confirmPassword;
+      cache.user(user);
+      const { data, authenticate, redirection } = await authProvider.signUp(user);
+      if (authenticate) {
+        setUser(user);
+        push(redirection);
+      } else {
+        push(redirection);
+      }
+    };
+    signUp();
   });
 
   return (

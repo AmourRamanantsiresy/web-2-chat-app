@@ -10,6 +10,11 @@ export interface CreateUser extends User {
   confirmPassword?: string;
 }
 
+export interface CreatedUser {
+  status: number;
+  user: DomainUser;
+}
+
 export interface DomainUser {
   bio?: string;
   createdAt?: string;
@@ -18,6 +23,7 @@ export interface DomainUser {
   id?: number;
   name?: string;
   status?: string;
+  token?: string;
 }
 
 export interface RestUser extends DomainUser {

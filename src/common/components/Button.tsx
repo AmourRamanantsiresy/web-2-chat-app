@@ -13,9 +13,9 @@ export const Button = (props: ButtonProps) => {
 const getButtonVariant = (variant: ButtonVariant) => {
   switch (variant) {
     case 'primary':
-      return 'bg-blue-400 hover:bg-blue-500';
+      return 'bg-green-400 hover:bg-green-500';
     case 'secondary':
-      return 'bg-yellow-400 hover:bg-yellow-500';
+      return 'bg-blue-400 hover:bg-blue-500';
     case 'danger':
       return 'bg-red-400 hover:bg-red-500';
     default:

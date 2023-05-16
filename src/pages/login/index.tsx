@@ -44,9 +44,12 @@ const SignInPage = () => {
             <form className='self-center px-8 pb-10 rounded' onSubmit={handleSubmit}>
               <div className='mt-12 mb-1'>
                 <Input label='Email' name='email' />
-                <Input label='Password' name='password' />
+                <Input label='Password' name='password' type='password' />
               </div>
-              <div className='flex justify-end w-full'>
+              <div className='flex justify-between items-center w-full'>
+                <span className='text-blue-500 cursor-pointer hover:text-blue-700' onClick={() => push('/signup')}>
+                  Create account?
+                </span>{' '}
                 <Button label='Send' type='submit' />
               </div>
             </form>

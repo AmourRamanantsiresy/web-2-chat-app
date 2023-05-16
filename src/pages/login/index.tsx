@@ -1,4 +1,4 @@
-import { Input, Layout } from '@/common/components';
+import { Button, Input, Layout } from '@/common/components';
 import { CreateUser, LoginUser } from '@/common/types';
 import { cache } from '@/common/utils';
 import { authProvider } from '@/providers/auth-provider';
@@ -47,9 +47,7 @@ const SignInPage = () => {
                 <Input label='Password' name='password' />
               </div>
               <div className='flex justify-end w-full'>
-                <button type='submit' className='px-6 py-2 text-white bg-blue-400 rounded hover:bg-blue-500'>
-                  Send
-                </button>
+                <Button label='Send' type='submit' />
               </div>
             </form>
           </div>

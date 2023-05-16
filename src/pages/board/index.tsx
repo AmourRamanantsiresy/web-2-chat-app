@@ -1,4 +1,4 @@
-import { Layout, SendIcon } from '@/common/components';
+import { Layout, MenuItem, MenuTitle, SendIcon } from '@/common/components';
 import { authProvider } from '@/providers';
 import { useRouter } from 'next/router';
 
@@ -21,17 +21,31 @@ const Board = () => {
             Logout
           </button>
         </nav>
-        <div className='p-5 my-7 w-10/12 h-3/4 bg-gray-100 rounded'>
-          <h1 className='text-black'>This is the chat room</h1>
-        </div>
-        <div className='flex justify-around items-center mt-2 w-10/12 h-12 rounded border'>
-          <input
-            className='px-5 py-2 mx-2 w-full bg-gray-100 rounded appearance-none focus:outline-none'
-            placeholder='12'
-          />
-          <div className='mr-2'>
-            <SendIcon background='bg-blue-500' color='rgb(59,130,246)' width='20px' />
+        <div className='flex relative w-full h-full items-between'>
+          <div className='p-4 w-1/6 h-full bg-blue-100'>
+            <MenuTitle />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
+            <MenuItem />
           </div>
+          <div className='flex relative flex-col justify-center items-center w-4/6 h-full'>
+            <div className='p-5 my-7 w-10/12 h-3/4 bg-gray-100 rounded'>
+              <h1 className='text-black'>This is the chat room</h1>
+            </div>
+            <div className='flex justify-around items-center mt-2 w-10/12 h-12 rounded border'>
+              <input
+                className='px-5 py-2 mx-2 w-full bg-gray-100 rounded appearance-none focus:outline-none'
+                placeholder='12'
+              />
+              <div className='mr-2'>
+                <SendIcon background='bg-blue-500' color='rgb(59,130,246)' width='20px' />
+              </div>
+            </div>
+          </div>
+          <div className='p-4 w-1/6 h-full bg-blue-100'>this</div>
         </div>
       </div>
     </Layout>

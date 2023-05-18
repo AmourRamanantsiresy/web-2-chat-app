@@ -19,7 +19,7 @@ export const authProvider = {
   },
   signIn: async (user: LoginUser) => {
     try {
-      const restUser: RestUser = (await publicRequest().post('/users/login', user)).data;
+      const restUser: RestUser = (await publicRequest().post('/users/login', user)).data.user;
       cache.accessToken(restUser.token);
       return { redirection: '/board', data: restUser as DomainUser, authenticate: true };
     } catch (error) {

@@ -1,4 +1,4 @@
-import { Layout, MenuItem, MenuTitle, SendIcon } from '@/common/components';
+import { ChatHeader, Layout, MenuItem, MenuTitle, SendIcon } from '@/common/components';
 import { authProvider } from '@/providers';
 import { useRouter } from 'next/router';
 
@@ -12,7 +12,7 @@ const Board = () => {
   return (
     <Layout>
       <div className='flex relative flex-col items-center w-screen h-screen'>
-        <nav className='flex items-center w-full h-12 bg-blue-500'>
+        <nav className='flex items-center w-full h-14 bg-green-500'>
           <h1 className='ml-3 w-11/12 font-bold'>Slack</h1>
           <button
             onClick={handleLogout}
@@ -29,10 +29,10 @@ const Board = () => {
             <MenuItem />
             <MenuItem />
             <MenuItem />
-            <MenuItem />
           </div>
           <div className='flex relative flex-col justify-center items-center w-4/6 h-full'>
-            <div className='p-5 my-7 w-10/12 h-3/4 bg-gray-100 rounded'>
+            <ChatHeader />
+            <div className='p-5 mb-7 w-10/12 h-3/4 bg-gray-100 rounded'>
               <h1 className='text-black'>This is the chat room</h1>
             </div>
             <div className='flex justify-around items-center mt-2 w-10/12 h-12 rounded border'>

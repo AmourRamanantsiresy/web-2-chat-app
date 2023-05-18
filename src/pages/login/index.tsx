@@ -1,8 +1,7 @@
 import { Button, Input, Layout } from '@/common/components';
 import { CreateUser, LoginUser } from '@/common/types';
-import { cache } from '@/common/utils';
 import { authProvider } from '@/providers/auth-provider';
-import { useGlobalStore } from '@/store/useGlobalStore';
+import { useGlobalStore } from '@/store';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 

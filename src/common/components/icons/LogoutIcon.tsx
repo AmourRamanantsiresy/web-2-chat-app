@@ -1,7 +1,7 @@
 import { CreateIcon } from './CreateIcon';
 import { IconProps } from '@/common/types';
 
-export const SendIcon = (props: IconProps) => {
+export const LogoutIcon = (props: IconProps) => {
   const { color, width, background, onClick } = props;
   return (
     <CreateIcon sx={background} onClick={onClick}>
@@ -18,8 +18,8 @@ export const SendIcon = (props: IconProps) => {
         <path
           stroke-linecap='round'
           stroke-linejoin='round'
-          d='M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5'
-        ></path>
+          d='M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9'
+        />
       </svg>
     </CreateIcon>
   );

@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { GlobalStore } from './type';
+import { GlobalStore } from '.';
 import { produce } from 'immer';
 
 export const useGlobalStore = create<GlobalStore>()(set => ({
@@ -17,6 +17,14 @@ export const useGlobalStore = create<GlobalStore>()(set => ({
       })
     );
   },
+  setSidebar(value) {
+    set(
+      produce((state: GlobalStore) => {
+        state.sidebar = value;
+      })
+    );
+  },
   user: null,
   errorMessage: '',
+  sidebar: true,
 }));

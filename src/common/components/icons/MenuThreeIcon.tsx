@@ -1,7 +1,7 @@
 import { CreateIcon } from './CreateIcon';
 import { IconProps } from '@/common/types';
 
-export const SendIcon = (props: IconProps) => {
+export const MenuThreeIcon = (props: IconProps) => {
   const { color, width, background, onClick } = props;
   return (
     <CreateIcon sx={background} onClick={onClick}>
@@ -11,15 +11,15 @@ export const SendIcon = (props: IconProps) => {
         fill='none'
         stroke='currentColor'
         strokeWidth='1.5'
-        viewBox='0 0 24 24'
+        viewBox='0 0 20 20'
         xmlns='http://www.w3.org/2000/svg'
         aria-hidden='true'
       >
         <path
-          stroke-linecap='round'
-          stroke-linejoin='round'
-          d='M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5'
-        ></path>
+          fill-rule='evenodd'
+          d='M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10zm0 5.25a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75a.75.75 0 01-.75-.75z'
+          clip-rule='evenodd'
+        />
       </svg>
     </CreateIcon>
   );

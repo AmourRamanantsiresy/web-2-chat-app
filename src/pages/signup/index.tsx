@@ -6,7 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { SignUpSchema, signUpSchema, userSignUpDefaultValues } from './utils';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { authProvider } from '@/providers';
-import { useGlobalStore } from '@/store/useGlobalStore';
+import { useGlobalStore } from '@/store';
 
 const SignInPage = () => {
   const form = useForm<SignUpSchema>({

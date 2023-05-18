@@ -2,9 +2,9 @@ import { CreateIcon } from './CreateIcon';
 import { IconProps } from '@/common/types';
 
 export const LoadingIcon = (props: IconProps) => {
-  const { color, width, background } = props;
+  const { color, width, background, onClick } = props;
   return (
-    <CreateIcon sx={background}>
+    <CreateIcon sx={background} onClick={onClick}>
       <svg
         color={color}
         width={width}

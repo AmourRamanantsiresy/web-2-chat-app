@@ -1,24 +1,21 @@
 import { ButtonProps, ButtonVariant } from '../types';
+import { getColor } from '../utils';
 
 export const Button = (props: ButtonProps) => {
-  const { className, variant = 'primary', label, ...others } = props;
+  const { className, variant = 'primary', label, icon, ...others } = props;
+
+  const color = getColor(variant);
+  const buttonColor = `bg-${color}-500 hover:bg-${color}-600`;
 
   return (
-    <button className={`px-6 py-2 m-2 text-white rounded ${className} ${getButtonVariant(variant)}`} {...others}>
-      {label}
-    </button>
+    <div className='relative w-fit'>
+      <button
+        className={`relative px-6 py-2 ${icon && 'pr-12'} m-2 text-white rounded ${className} ${buttonColor} `}
+        {...others}
+      >
+        {label}buttonColor
+      </button>
+      <div className='absolute right-2 top-1/2 -translate-y-1/2'>{icon}</div>
+    </div>
   );
-};
-
-const getButtonVariant = (variant: ButtonVariant) => {
-  switch (variant) {
-    case 'primary':
-      return 'bg-green-400 hover:bg-green-500';
-    case 'secondary':
-      return 'bg-blue-400 hover:bg-blue-500';
-    case 'danger':
-      return 'bg-red-400 hover:bg-red-500';
-    default:
-      throw new Error(`The ${variant} is not a valid variant.`);
-  }
 };

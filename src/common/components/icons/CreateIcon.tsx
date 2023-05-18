@@ -3,13 +3,15 @@ import { ReactNode } from 'react';
 interface CreateIconProps {
   sx: string;
   children: ReactNode;
+  onClick?: () => void;
 }
 
 export const CreateIcon = (props: CreateIconProps) => {
-  const { sx, children } = props;
+  const { sx, children, onClick } = props;
   return (
     <div
-      className={`flex justify-center p-2 m-1 bg-opacity-20 rounded-full transition-all item-center hover:bg-opacity-30 ${sx}`}
+      onClick={onClick}
+      className={`flex justify-center p-2 m-1 bg-opacity-20 rounded-full transition-all cursor-pointer item-center hover:bg-opacity-30 ${sx}`}
     >
       {children}
     </div>

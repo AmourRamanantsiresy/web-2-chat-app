@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 
 export type ButtonVariant = 'primary' | 'secondary' | 'danger';
 
@@ -9,4 +9,5 @@ export type ButtonProps = {
   style?: CSSProperties;
   variant?: ButtonVariant;
   label: string;
+  icon?: ReactNode;
 };

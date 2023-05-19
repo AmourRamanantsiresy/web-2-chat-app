@@ -1,21 +1,29 @@
-import { Button, Layout, LogoutIcon } from '@/common/components';
+import { Layout } from '@/common/components';
+import { useEffect, useState } from 'react';
+import { DomainUser } from '@/common/types';
+import { userProvider } from '@/providers';
+import { printError } from '@/common/utils';
 
 const Home = () => {
+  const [user, setUser] = useState<DomainUser | null>(null);
+  const [isLoading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      setLoading(true);
+      const fetchedUser = await userProvider.getOne();
+      setUser(fetchedUser);
+    };
+    fetchUser()
+      .catch(printError)
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
   return (
     <Layout>
-      <div className='flex w-screen h-screen'>
-        <div className='flex flex-col justify-start items-center pt-6 w-1/5 h-full bg-indigo-200'>
-          <div className='overflow-hidden w-52 h-52 bg-gray-100 rounded-full'></div>
-          <div className='px-4 mt-10 w-full h-4/6'>
-            <h1 className='font-bold'>Username</h1>
-            <h1 className='mt-2'>User bio for example this is the bio.</h1>
-          </div>
-          <div className='w-full h-16'>
-            <Button label='Logout' icon={<LogoutIcon background='bg-indigo-500' color='white' width='20px' />} />
-          </div>
-        </div>
-        <div className='overflow-x-hidden overflow-y-scroll py-6 w-full h-full bg-indigo-400'></div>
-      </div>
+      <div className='flex w-screen h-screen'>{JSON.stringify(user || {})}</div>
     </Layout>
   );
 };

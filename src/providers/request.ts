@@ -9,7 +9,7 @@ export const privateRequest = () => {
   }
   return axios.create({
     headers: {
-      Authorization: 'bearer ',
+      Authorization: `bearer ${getCached.accessToken()}`,
     },
     baseURL: BASE_URL,
   });

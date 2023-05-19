@@ -2,6 +2,7 @@ export interface LoginUser {
   email?: string;
   password?: string;
 }
+
 export interface User extends LoginUser {
   name?: string;
 }
@@ -30,4 +31,11 @@ export interface RestUser extends DomainUser {
   deletedAt?: string;
   token?: string;
   updatedAt?: string;
+}
+
+export interface EditableUser {
+  name?: string;
+  oldPassword: string | number;
+  password: string | number;
+  bio: string;
 }

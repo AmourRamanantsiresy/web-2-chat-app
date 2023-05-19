@@ -1,2 +1,3 @@
 export * from './cache';
-export * from './getColor';
+export * from './get-color';
+export * from './print-error';

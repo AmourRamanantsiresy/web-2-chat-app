@@ -1,16 +1,16 @@
-import { ButtonProps, ButtonVariant } from '../types';
-import { getColor } from '../utils';
+import { useMemo } from 'react';
+import { ButtonProps } from '../types';
+import { getButtonBg } from '../utils';
 
 export const Button = (props: ButtonProps) => {
   const { className, variant = 'primary', label, icon, ...others } = props;
 
-  const color = getColor(variant);
-  const buttonColor = `bg-${color}-500 hover:bg-${color}-600`;
+  const buttonColor = useMemo(() => getButtonBg(variant), [variant]);
 
   return (
     <div className='relative w-fit'>
       <button
-        className={`relative px-6 py-2 ${icon && 'pr-12'} m-2 text-white rounded ${className} ${buttonColor} `}
+        className={`relative px-6 py-2 ${icon && 'pr-12'} m-2 text-white rounded ${buttonColor} ${className} `}
         {...others}
       >
         {label}

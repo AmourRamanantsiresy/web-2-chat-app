@@ -1,5 +1,5 @@
 import { privateRequest } from '@/providers/request';
-import { DomainUser, EditableUser, RestUser } from '@/common/types';
+import { EditableUser, RestUser } from '@/common/types';
 import { userMapper } from '@/providers/mapper';
 
 export const userProvider = {

@@ -1,19 +1,19 @@
 import { Variant } from '../types';
 
-export const getColor = (variant: Variant) => {
+export const getButtonBg = (variant: Variant) => {
   switch (variant) {
     case 'primary':
-      return 'indigo';
+      return 'bg-indigo-500 hover:bg-indigo-600';
     case 'secondary':
-      return 'blue';
+      return 'bg-purple-400 hover:bg-purple-500';
     case 'danger':
-      return 'red';
+      return 'bg-red-500 hover:bg-red-600';
     case 'info':
-      return 'gray';
+      return 'bg-gray-500 hover:bg-gray-600';
     case 'success':
-      return 'green';
+      return 'bg-green-500 hover:bg-green-600';
     case 'warning':
-      return 'yellow';
+      return 'bg-yellow-500 hover:bg-yellow-600';
     default:
       throw new Error(`The ${variant} is not a valid variant.`);
   }

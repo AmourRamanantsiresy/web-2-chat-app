@@ -10,4 +10,5 @@ export type ButtonProps = {
   variant?: ButtonVariant;
   label: string;
   icon?: ReactNode;
+  href?: string;
 };

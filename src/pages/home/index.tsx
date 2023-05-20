@@ -7,6 +7,12 @@ import { useGlobalStore } from '@/store';
 import { HiChat } from 'react-icons/hi';
 import Link from 'next/link';
 
+const ChatIcon = () => (
+  <CreateIcon sx='bg-indigo-500'>
+    <HiChat color='white' />
+  </CreateIcon>
+);
+
 const Home = () => {
   const { setUser, user } = useGlobalStore();
 
@@ -31,18 +37,7 @@ const Home = () => {
         </div>
         <UserForm user={user} />
         <div className=''>
-          <Link href='/board'>
-            <Button
-              variant='secondary'
-              onClick={() => {}}
-              label='Chat'
-              icon={
-                <CreateIcon sx='bg-indigo-500'>
-                  <HiChat color='white' />
-                </CreateIcon>
-              }
-            />
-          </Link>
+          <Button href='/board' variant='secondary' label='Chat' icon={<ChatIcon />} />
         </div>
       </div>
     </Layout>

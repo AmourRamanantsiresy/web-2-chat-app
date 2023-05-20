@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 import { ButtonProps } from '../types';
 import { getButtonBg } from '../utils';
+import Link from 'next/link';
 
-export const Button = (props: ButtonProps) => {
+export const _Button = (props: ButtonProps) => {
   const { className, variant = 'primary', label, icon, ...others } = props;
 
   const buttonColor = useMemo(() => getButtonBg(variant), [variant]);
@@ -18,4 +19,10 @@ export const Button = (props: ButtonProps) => {
       <div className='absolute right-2 top-1/2 -translate-y-1/2'>{icon}</div>
     </div>
   );
+};
+
+export const Button = (props: ButtonProps) => {
+  const { href, ...others } = props;
+
+  return href ? <Link href={href}>{<_Button {...others} />}</Link> : <_Button {...others} />;
 };

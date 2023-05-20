@@ -1,5 +1,5 @@
 export * from './ChatHeader';
 export * from './MenuItem';
-export * from './MenuTitle';
+export * from './MenuButton';
 export * from './Navbar';
 export * from './SideBar';

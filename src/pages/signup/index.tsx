@@ -1,6 +1,6 @@
 import { Button, Input, Layout } from '@/common/components';
 import { CreateUser } from '@/common/types';
-import { cache } from '@/common/utils';
+import { cache, printError } from '@/common/utils';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 import { SignUpSchema, signUpSchema, userSignUpDefaultValues } from './utils';
@@ -15,7 +15,7 @@ const SignInPage = () => {
     resolver: zodResolver(signUpSchema),
   });
 
-  const { setUser, setErrorMessage } = useGlobalStore();
+  const { setUser } = useGlobalStore();
   const { push } = useRouter();
 
   const handleSubmit = form.handleSubmit((createUser: CreateUser) => {
@@ -26,12 +26,12 @@ const SignInPage = () => {
       const { data, authenticate, redirection } = await authProvider.signUp(user);
       if (authenticate) {
         setUser(user);
-        push(redirection);
+        push(redirection).catch(printError);
       } else {
-        push(redirection);
+        push(redirection).catch(printError);
       }
     };
-    signUp();
+    signUp().catch(print);
   });
 
   return (
@@ -45,12 +45,7 @@ const SignInPage = () => {
                 <Input label='name' name='name' />
                 <Input label='Email' name='email' />
                 <Input type='password' label='Password' name='password' />
-                <Input
-                  type='password'
-                  label='Confirm password'
-                  name='confirmPassword'
-                  validate={(pass: string) => pass.length > 10 || 'Not enough'}
-                />
+                <Input type='password' label='Confirm password' name='confirmPassword' />
               </div>
               <div className='flex justify-end w-full'>
                 <div className='flex justify-between items-center w-full'>

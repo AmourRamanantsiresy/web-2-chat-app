@@ -25,7 +25,9 @@ export const Input = (props: InputProps) => {
         placeholder={label}
         id={getInputId(name)}
       />
-      {!!error && <span className='absolute right-0 bottom-0 text-xs text-red-500'>{error.message as string}</span>}
+      {!!error && (
+        <span className='absolute right-0 text-end top-14 text-xs text-red-500'>{error.message as string}</span>
+      )}
     </div>
   );
 };

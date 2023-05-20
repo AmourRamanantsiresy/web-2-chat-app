@@ -11,8 +11,8 @@ export const userProvider = {
     const user: RestUser = { ..._user };
     return userMapper.toDomain(user);
   },
-  updateOne: async (useredited: EditableUser) => {
-    const { data: user } = await privateRequest().put('/user', useredited);
-    return user;
+  updateOne: async (userEdited: EditableUser) => {
+    const { data: user } = await privateRequest().put('/user', userEdited);
+    return userMapper.toDomain(user as RestUser);
   },
 };

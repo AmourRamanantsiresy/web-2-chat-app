@@ -1,6 +1,5 @@
 import { Layout } from '@/common/components';
-import { useEffect, useState } from 'react';
-import { DomainUser } from '@/common/types';
+import { useEffect } from 'react';
 import { userProvider } from '@/providers';
 import { printError } from '@/common/utils';
 import { UserForm } from '@/pages/home/UserForm';

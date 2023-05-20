@@ -9,10 +9,13 @@ export const userProvider = {
     } = await privateRequest().get('/user');
 
     const user: RestUser = { ..._user };
+
     return userMapper.toDomain(user);
   },
   updateOne: async (userEdited: EditableUser) => {
-    const { data: user } = await privateRequest().put('/user', userEdited);
+    const {
+      data: { user },
+    } = await privateRequest().put('/user', userEdited);
     return userMapper.toDomain(user as RestUser);
   },
 };

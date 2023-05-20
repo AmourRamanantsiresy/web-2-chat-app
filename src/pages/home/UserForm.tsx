@@ -25,7 +25,6 @@ export const UserForm = (props: UserFromProps) => {
     const updateUser = async () => {
       const user = await userProvider.updateOne(data);
       setUser(user);
-      alert('Changes have been saved.');
     };
     updateUser().catch(printError);
   });

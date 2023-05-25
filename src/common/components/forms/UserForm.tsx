@@ -5,7 +5,7 @@ import { Button, Input } from '@/common/components/index';
 import { userProvider } from '@/providers';
 import { printError } from '@/common/utils';
 import { useGlobalStore } from '@/store';
-import { updateUserSchema } from './utils';
+import { updateUserSchema } from '../utils';
 
 interface UserFromProps {
   user: DomainUser | null;

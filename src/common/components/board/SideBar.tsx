@@ -20,8 +20,17 @@ export const SideBar = () => {
       <MenuItem onClick={openChannelModal} icon={<HiPlusCircle />} name='Add channel' />
 
       <Modal open={channelModal}>
-        <div>this is the best</div>
-        <Button label='close' onClick={closeChannelModal} />
+        <div style={{ width: '30rem' }} className=''>
+          <div className='px-1 pb-1 mb-3 w-full border-b'>
+            <p className='text-base'>Add new channel.</p>
+          </div>
+          <div>
+            <p className='p-2 bg-gray-100'>Here, I will implement the channel creation form.</p>
+          </div>
+          <div className='flex justify-end items-end mt-3 w-full'>
+            <Button label='close' onClick={closeChannelModal} />
+          </div>
+        </div>
       </Modal>
     </div>
   );

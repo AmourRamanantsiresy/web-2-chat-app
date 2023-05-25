@@ -1,12 +1,11 @@
 import { DomainUser, EditableUser } from '@/common/types';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Input } from '@/common/components';
+import { Button, Input } from '@/common/components/index';
 import { userProvider } from '@/providers';
 import { printError } from '@/common/utils';
-import { updateUserSchema } from '@/pages/home/utils';
-import { useCallback } from 'react';
 import { useGlobalStore } from '@/store';
+import { updateUserSchema } from './utils';
 
 interface UserFromProps {
   user: DomainUser | null;

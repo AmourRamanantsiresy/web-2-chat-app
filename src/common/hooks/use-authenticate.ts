@@ -20,10 +20,7 @@ export const useAuthenticate = () => {
     } else if ((pathname === '/login' || pathname === '/signup') && accessToken !== null) {
       push('/board');
     }
-    const timeoutId = setTimeout(() => {
-      setLoading(false);
-      clearTimeout(timeoutId);
-    }, 500);
+    setLoading(false);
   }, [pathname, push]);
   return isLoading;
 };

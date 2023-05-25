@@ -1,9 +1,6 @@
 import { ReactNode } from 'react';
 import { useAuthenticate } from '../hooks';
-import { LoadingIcon } from './icons';
-import { GetServerSideProps } from 'next';
-import { getCached } from '../utils';
-import { useRouter } from 'next/router';
+import { useModal } from '@/store';
 
 type LayoutProps = {
   children: ReactNode | string;
@@ -16,6 +13,18 @@ type Redirection = {
 
 export const Layout = (props: LayoutProps) => {
   useAuthenticate();
+  const { modalState } = useModal();
 
-  return <>{props.children}</>;
+  return (
+    <>
+      {props.children}
+      <div
+        className={`absolute left-1/2 transition-top -translate-x-1/2 ${
+          modalState.isVisible ? 'slide-bottom-1' : 'slide-bottom-0'
+        }`}
+      >
+        {modalState.content}
+      </div>
+    </>
+  );
 };

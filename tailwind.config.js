@@ -13,6 +13,19 @@ module.exports = {
         '.transition-1': {
           transition: 'all 500ms !important',
         },
+        '.transition-top': {
+          transitionProperty: 'opacity, top',
+          transitionDuration: '500ms',
+          transitionTiming: 'ease-in-out',
+        },
+        '.slide-bottom-0': {
+          top: 0,
+          opacity: 0,
+        },
+        '.slide-bottom-1': {
+          top: '50%',
+          opacity: 1,
+        },
       };
 
       addUtilities(newUtilities);

@@ -24,7 +24,15 @@ export const useGlobalStore = create<GlobalStore>()(set => ({
       })
     );
   },
+  setModal(value) {
+    set(
+      produce((state: GlobalStore) => {
+        state.modal = value;
+      })
+    );
+  },
   user: null,
   errorMessage: '',
   sidebar: true,
+  modal: null,
 }));

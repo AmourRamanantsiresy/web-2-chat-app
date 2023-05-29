@@ -7,10 +7,7 @@ export interface RestChannel {
   createdAt: string;
 }
 
-enum ChannelType {
-  PUBLIC = 'public',
-  PRIVATE = 'private',
-}
+type ChannelType = 'public' | 'private';
 
 type UserIds = number[];
 

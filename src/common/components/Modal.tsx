@@ -13,10 +13,7 @@ export const Modal = (props: Modal) => {
   useEffect(() => {
     if (open) {
       openModal(
-        <div
-          style={{ minWidth: '5rem' }}
-          className='overflow-hidden p-5 bg-white rounded-md shadow-lg shadow-indigo-100'
-        >
+        <div style={{ minWidth: '5rem' }} className='p-5 bg-white rounded-md shadow-sm  shadow-indigo-100'>
           {children}
         </div>
       );

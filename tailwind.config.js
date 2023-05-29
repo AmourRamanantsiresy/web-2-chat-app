@@ -23,7 +23,7 @@ module.exports = {
           opacity: 0,
         },
         '.slide-bottom-1': {
-          top: '40%',
+          top: '50%',
           opacity: 1,
         },
       };

@@ -3,6 +3,7 @@ import { MenuItem } from '.';
 import { useState } from 'react';
 import { Modal } from '../Modal';
 import { Button } from '../Button';
+import { CreateChannelForm } from '../forms';
 
 export const SideBar = () => {
   const [channelModal, setChannelModal] = useState(false);
@@ -25,7 +26,7 @@ export const SideBar = () => {
             <p className='text-base'>Add new channel.</p>
           </div>
           <div>
-            <p className='p-2 bg-gray-100'>Here, I will implement the channel creation form.</p>
+            <CreateChannelForm />
           </div>
           <div className='flex justify-end items-end mt-3 w-full'>
             <Button label='close' onClick={closeChannelModal} />

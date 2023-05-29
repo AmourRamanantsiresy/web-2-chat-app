@@ -1,6 +1,6 @@
 import { FormProvider, useForm } from 'react-hook-form';
 import { CreateChannel } from '@/common/types';
-import { Input, SelectInputMultiple } from '@/common/components';
+import { Input, SelectInput, SelectMultipleInput } from '@/common/components';
 
 export const CreateChannelForm = () => {
   const form = useForm<CreateChannel>({ mode: 'all', defaultValues: { name: '', members: [], type: 'private' } });
@@ -8,9 +8,13 @@ export const CreateChannelForm = () => {
     <FormProvider {...form}>
       <form>
         <Input label='Channel name' name='name' />
-        <SelectInputMultiple<any>
-          options={[{ name: 'user1' }, { name: 'user2' }, { name: 'user3' }]}
+        <SelectMultipleInput<any>
+          label='Members'
+          options={[]}
           renderName='name'
+          renderRef='name'
+          onChange={e => console.log(e)}
+          key='multiple-select-user-channel'
         />
       </form>
     </FormProvider>

@@ -3,7 +3,7 @@ export * from './Input';
 export * from './Layout';
 export * from './Modal';
 export * from './SelectInput';
-export * from './SelectInputMultiple';
+export * from './SelectMultipleInput';
 export * from './board';
 export * from './forms';
 export * from './icons';

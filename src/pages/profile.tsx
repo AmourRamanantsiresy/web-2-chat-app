@@ -1,4 +1,4 @@
-import { Button } from '@/common/components';
+import { Button, ProfileLayout, UserForm } from '@/common/components';
 import { withAuth } from '@/common/utils';
 import { useNotify } from '@/store';
 import { User } from '@/types';
@@ -10,17 +10,18 @@ type ProfileProps = {
 };
 
 const Profile = ({ user }: ProfileProps) => {
-  const { notify } = useNotify();
+  const { bio, email, name, id } = user;
   return (
-    <div className='w-screen h-screen'>
-      <Button
-        variant='secondary'
-        label='Toast'
-        onClick={() => {
-          notify('Clicked', 'error');
-        }}
-      />
-    </div>
+    <ProfileLayout bio={bio}>
+      <div className='flex justify-around items-center w-full h-hull'>
+        <div className='w-5/12 p4'>
+          <h1 className='text-lg'>Informations</h1>
+          <p className='font-bold text-md'>{name}</p>
+          <p className='font-bold text-md'>{email}</p>
+        </div>
+        <UserForm user={user} />
+      </div>
+    </ProfileLayout>
   );
 };
 

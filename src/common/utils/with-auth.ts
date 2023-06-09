@@ -42,9 +42,11 @@ export const withAuth = async (context: GetServerSidePropsContext) => {
     destination: '/profile',
   };
 
+  console.log(user);
+
   return {
     props: {
-      user,
+      user: user as User,
     },
     redirect,
   };

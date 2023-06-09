@@ -2,13 +2,15 @@ import { DomainUser, EditableUser } from '@/common/types';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, Input } from '@/common/components/index';
-import { userProvider } from '@/providers';
-import { printError } from '@/common/utils';
+import { cookies, printError } from '@/common/utils';
 import { useGlobalStore } from '@/store';
 import { updateUserSchema } from '../utils';
+import { UserProvider } from '@/providers';
+import { useRouter } from 'next/router';
+import { User } from '@/types';
 
 interface UserFromProps {
-  user: DomainUser | null;
+  user: User;
 }
 
 export const UserForm = (props: UserFromProps) => {
@@ -18,12 +20,13 @@ export const UserForm = (props: UserFromProps) => {
     resolver: zodResolver(updateUserSchema),
     defaultValues: { bio: user?.bio || '', name: user?.name || '', oldPassword: '', password: '' },
   });
-  const { setUser } = useGlobalStore();
+  const { reload } = useRouter();
 
   const handleSubmit = form.handleSubmit(data => {
     const updateUser = async () => {
-      const user = await userProvider.updateOne(data);
-      setUser(user);
+      const user = await UserProvider.api(cookies.getAccessToken()).updateOne(data);
+      cookies.deleteUser();
+      reload();
     };
     updateUser().catch(printError);
   });
@@ -37,6 +40,7 @@ export const UserForm = (props: UserFromProps) => {
           <Input name='bio' label='Bio' />
           <Input name='oldPassword' label='Old password' type='password' />
           <Input name='password' label='New password' type='password' />
+          <Input name='confirmPassword' label='Confirm password' type='password' />
           <Button label='Update' type='submit' />
         </form>
       </FormProvider>

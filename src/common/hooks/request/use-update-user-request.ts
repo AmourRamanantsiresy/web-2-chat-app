@@ -1,7 +1,7 @@
 import { UserProvider } from '@/providers';
 import useSwrMutation from 'swr/mutation';
 import { cookies } from '@/common/utils';
-import { UpdateUserForm } from '../form/resolver/user-update-resolver';
+import { UpdateUserForm } from '../form/resolver';
 import { EditableUser } from '@/common/types';
 
 async function updateUser(url: string, { arg }: { arg: UpdateUserForm }) {

@@ -1,9 +1,15 @@
-import { Input } from '@/common/components';
+import { Button, Input } from '@/common/components';
+import { useCreateChannelForm } from '@/common/hooks/form/use-create-channel-form';
 import { cookies, withAuth } from '@/common/utils';
-import { MessageProvider, UserProvider } from '@/providers';
-import { CreateChannel, User } from '@/types';
+import { UserProvider } from '@/providers';
+import { CreateChannel, UserMin } from '@/types';
 import { GetServerSidePropsContext } from 'next';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useFormContext, useWatch } from 'react-hook-form';
+import { MultiSelect, Option } from 'react-multi-select-component';
+
+const parseUserToOption = (users: UserMin[]) =>
+  users.map(({ name, id }) => ({ label: name, value: id.toString() } as Option));
+const parseOptionToMember = (options: Option[]) => options.map(({ value }) => value as string);
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
   const { redirect } = await withAuth(context);
@@ -12,32 +18,60 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   }
   const accessToken = cookies.getAccessToken(context.req.cookies);
   const users = await UserProvider.api(accessToken).getAll();
+
   return {
     props: {
-      users,
+      users: parseUserToOption(users),
     },
   };
 };
 
 type CreateProps = {
-  users: User[];
+  users: Option[];
+};
+type MultipleSelectProps = {
+  users: Option[];
+};
+
+const MultipleSelect = (props: MultipleSelectProps) => {
+  const form = useFormContext();
+  const { members } = useWatch<CreateChannel>();
+  const { users } = props;
+
+  const handleChange = (users: Option[]) => {
+    form.setValue('members', parseOptionToMember(users) as any);
+  };
+
+  return (
+    <MultiSelect
+      className='py-3'
+      labelledBy='label'
+      value={users.filter(({ value }) => members?.includes(value))}
+      onChange={handleChange}
+      options={users}
+    />
+  );
 };
 
 const Create = ({ users }: CreateProps) => {
-  const form = useForm<CreateChannel>({ mode: 'all', defaultValues: { members: [], name: '', type: 'public' } });
+  const { handleSubmit, hookForm, request } = useCreateChannelForm();
 
   return (
-    <div className='flex justify-center items-center w-screen h-screen'>
-      <FormProvider {...form}>
-        <form>
+    <div className='flex relative justify-center items-center w-screen h-screen'>
+      <FormProvider {...hookForm}>
+        <form className='relative' onSubmit={handleSubmit}>
           <Input label='Name' name='name' />
-          <select
-            className='px-2 py-3 w-full text-gray-700 bg-white rounded-md border appearance-none focus:outline-blue-400 focus:border-blue-400 focus:shadow-blue-400'
-            {...form.register('type')}
-          >
-            <option value='public'>Public</option>
-            <option value='private'>Private</option>
-          </select>
+          <div>
+            <select
+              className='px-2 py-3 mb-2 w-full text-gray-700 bg-white rounded-md border appearance-none focus:outline-blue-400 focus:border-blue-400 focus:shadow-blue-400'
+              {...hookForm.register('type')}
+            >
+              <option value='public'>Public</option>
+              <option value='private'>Private</option>
+            </select>
+          </div>
+          <MultipleSelect users={users} />
+          <Button className='-translate-x-2' label='Create' disabled={request.isLoading} />
         </form>
       </FormProvider>
     </div>

@@ -1,10 +1,10 @@
+import { User } from '@/types';
+import { UpdateUserForm, userUpdateResolver } from './resolver';
 import { useForm } from 'react-hook-form';
-import { useUpdateUserRequest } from '../request';
 import { useRequestErrorHandler } from '../use-request-handler';
 import { useRouter } from 'next/router';
-import { UpdateUserForm, userUpdateResolver } from './resolver/user-update-resolver';
+import { useUpdateUserRequest } from '../request';
 import { cookies } from '@/common/utils';
-import { User } from '@/types';
 
 export const useUpdateUserForm = (user: User) => {
   const hookForm = useForm<UpdateUserForm>({

@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { SignUpFormType, signUpResolver } from './resolver';
-import { useSignUpRequest } from '../request';
 import { useRequestErrorHandler } from '../use-request-handler';
 import { useRouter } from 'next/router';
+import { useSignUpRequest } from '../request';
 
 export const useSignUpForm = () => {
   const hookForm = useForm<SignUpFormType>({

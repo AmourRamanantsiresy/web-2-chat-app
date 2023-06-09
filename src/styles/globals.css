@@ -3,28 +3,32 @@
 @tailwind utilities;
 
 body {
-    margin: 0;
-    padding: 0
+  margin: 0;
+  padding: 0;
 }
 
 .transparent {
-    background: rgba(255, 255, 255, 0.13);
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 30px;
-    backdrop-filter: blur(5.7px);
-    -webkit-backdrop-filter: blur(5.7px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    width: 450px;
-    height: 500px;
-    border-radius: 27px;
-    position: relative
+  background: rgba(255, 255, 255, 0.13);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 4px 30px;
+  backdrop-filter: blur(5.7px);
+  -webkit-backdrop-filter: blur(5.7px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 450px;
+  height: 500px;
+  border-radius: 27px;
+  position: relative;
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.dropdown-container {
+  @apply py-1 w-full text-gray-700 bg-white rounded-md border appearance-none focus:outline-blue-400 focus:border-blue-400 focus:shadow-blue-400;
 }

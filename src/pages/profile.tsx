@@ -10,15 +10,21 @@ type ProfileProps = {
 };
 
 const Profile = ({ user }: ProfileProps) => {
-  const { bio, email, name, id } = user;
+  const { bio, email, name } = user;
   return (
-    <ProfileLayout bio={bio}>
-      <div className='flex justify-around items-center w-full h-hull'>
-        <div className='w-5/12 p4'>
-          <h1 className='text-lg'>Informations</h1>
+    <ProfileLayout>
+      <div className='flex justify-start items-start w-full h-hull'>
+        <div className='p-4 w-5/12 h-full bg-white'>
+          <div className='py-6'>
+            <h1 className='text-lg'>Informations</h1>
+          </div>
           <p className='font-bold text-md'>{name}</p>
           <p className='font-bold text-md'>{email}</p>
+          <div className='relative mt-6'>
+            <p className='w-2/3 text-md'>{bio}</p>
+          </div>
         </div>
+        <div className='w-2/12'></div>
         <UserForm user={user} />
       </div>
     </ProfileLayout>

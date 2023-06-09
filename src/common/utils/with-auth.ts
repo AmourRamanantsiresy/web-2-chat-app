@@ -37,7 +37,7 @@ export const withAuth = async (context: GetServerSidePropsContext) => {
     }
   }
 
-  const redirect = context.req.url?.includes('/login') && {
+  const redirect = (context.req.url?.includes('/login') || context.req.url?.length === 1) && {
     permanent: true,
     destination: '/profile',
   };

@@ -1,4 +1,4 @@
-import { defaultToast, useGlobalStore } from './useGlobalStore';
+import { useGlobalStore } from './useGlobalStore';
 import { ToastType } from './type';
 
 export const useNotify = () => {
@@ -11,7 +11,7 @@ export const useNotify = () => {
       type,
     });
     const timeoutId = setTimeout(() => {
-      setToast({ ...defaultToast, type: toast.type });
+      setToast({ ...toast, isVisible: false });
       clearTimeout(timeoutId);
     }, timeout || 3_000);
   };

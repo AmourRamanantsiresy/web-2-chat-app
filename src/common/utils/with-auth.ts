@@ -7,6 +7,10 @@ export const withAuth = async (context: GetServerSidePropsContext) => {
   let user = cookies.getUser(context?.req?.cookies) as User;
   const accessToken = cookies.getAccessToken(context?.req?.cookies) as string;
 
+  if (context.req.url?.includes('/login') && !accessToken) {
+    return { props: {} };
+  }
+
   if (!accessToken) {
     return {
       redirect: {

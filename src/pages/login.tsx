@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 import { GetServerSidePropsContext } from 'next';
 import { cookies, withAuth } from '@/common/utils';
+import { useRequestHandler } from '@/common/hooks';
 
 const userSignInDefaultValues: LoginUser = {
   email: '',
@@ -19,20 +20,21 @@ const SignInPage = () => {
   });
 
   const { push } = useRouter();
-  const { setUser, setErrorMessage } = useGlobalStore();
+  const { setUser } = useGlobalStore();
+
+  const login = useRequestHandler(async user => {
+    const { redirection, data, authenticate } = await authProvider.signIn(user);
+    if (authenticate) {
+      cookies.setUser(data);
+      setUser(data);
+    }
+    push(redirection);
+  });
 
   const handleSubmit = form.handleSubmit((createUser: CreateUser) => {
     const user = { ...createUser };
     delete user.confirmPassword;
-    const login = async () => {
-      const { redirection, data, authenticate } = await authProvider.signIn(user);
-      if (authenticate) {
-        cookies.setUser(data);
-        setUser(data);
-      }
-      push(redirection);
-    };
-    login();
+    login(user);
   });
 
   return (

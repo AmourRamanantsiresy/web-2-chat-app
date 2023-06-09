@@ -26,11 +26,11 @@ export const Toast = ({ toast }: ToastProps) => {
         minWidth: '400px',
         maxWidth: '500px',
         transitionTimingFunction: 'ease-in-out',
-        transitionProperty: 'opacity, translate, bottom',
-        transitionDuration: '500ms',
+        transitionProperty: 'opacity, translate, bottom, background',
+        transitionDuration: '300ms',
       }}
-      className={`absolute shadow-md rounded-md p-4 right-4 ${getToastStyle(type)} ${
-        isVisible ? 'bottom-12 opacity-1' : 'bottom-0 opacity-0 translate-y-full'
+      className={`absolute shadow-md rounded-md p-4 right-4 ${
+        isVisible ? `bottom-12 translate-y-0 ${getToastStyle(type)} opacity-1` : 'bottom-0 opacity-0 translate-y-full'
       }`}
     >
       {content}

@@ -84,6 +84,15 @@ const CheckboxSelect = ({ users }: CheckboxSelectProps) => {
   );
 };
 
+type CustomButtonProps = {
+  isLoading: boolean;
+};
+
+const CustomButton = ({ isLoading }: CustomButtonProps) => {
+  const { members } = useWatch();
+  return <Button label='Add' icon={<AddIcon />} type='submit' disabled={isLoading || members.length === 0} />;
+};
+
 const ChannelEdit = ({ user, channelId, users }: ChannelEditProps) => {
   const { hookForm, handleSubmit, request } = useUpdateChannelForm(channelId, user);
 
@@ -94,7 +103,7 @@ const ChannelEdit = ({ user, channelId, users }: ChannelEditProps) => {
           <div>
             <CheckboxSelect users={users} />
           </div>
-          <Button label='Add' icon={<AddIcon />} type='submit' />
+          <CustomButton isLoading={request.isLoading} />
         </form>
       </FormProvider>
     </div>

@@ -3,6 +3,7 @@ import { ChannelProvider } from '@/providers';
 import { User } from '@/types';
 import useSWRMutation from 'swr/mutation';
 import { useRequestErrorHandler } from '../use-request-handler';
+import { useNotify } from '@/store';
 
 async function updateChannel(url: string, { arg }: { arg: { channelId: number; members: number[] } }) {
   const token = cookies.getAccessToken();
@@ -13,7 +14,12 @@ async function updateChannel(url: string, { arg }: { arg: { channelId: number; m
 
 export const useUpdateChannelRequest = (channelId: number, user: User) => {
   const errorHandler = useRequestErrorHandler();
-  const { isMutating, trigger, ...request } = useSWRMutation('/channel', updateChannel, { onError: errorHandler });
+  const { notify } = useNotify();
+
+  const { isMutating, trigger, ...request } = useSWRMutation('/channel', updateChannel, {
+    onError: errorHandler,
+    onSuccess: () => notify('Channel updated', 'success'),
+  });
 
   return {
     isLoading: isMutating,

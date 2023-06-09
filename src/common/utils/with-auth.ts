@@ -1,9 +1,9 @@
-import { GetServerSidePropsContext } from 'next';
+import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 import { cookies } from './cookies';
-import { User } from '../types';
+import { User } from '@/types';
 import { UserProvider } from '@/providers';
 
-export const withAuth = async (context: GetServerSidePropsContext) => {
+export const withAuth = async (context: GetServerSidePropsContext, next?: (user: User) => any) => {
   let user = cookies.getUser(context?.req?.cookies) as User;
   const accessToken = cookies.getAccessToken(context?.req?.cookies) as string;
 
@@ -42,7 +42,9 @@ export const withAuth = async (context: GetServerSidePropsContext) => {
     destination: '/profile',
   };
 
-  console.log(user);
+  if (next) {
+    return next(user);
+  }
 
   return {
     props: {

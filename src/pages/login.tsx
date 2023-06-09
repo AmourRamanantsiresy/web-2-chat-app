@@ -1,45 +1,15 @@
 import { Button, Input, Layout } from '@/common/components';
-import { CreateUser, LoginUser } from '@/common/types';
-import { authProvider } from '@/providers/auth-provider';
-import { useGlobalStore } from '@/store';
 import { useRouter } from 'next/router';
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider } from 'react-hook-form';
 import { GetServerSidePropsContext } from 'next';
-import { cookies, withAuth } from '@/common/utils';
-import { useRequestHandler } from '@/common/hooks';
-
-const userSignInDefaultValues: LoginUser = {
-  email: '',
-  password: '',
-};
+import { withAuth } from '@/common/utils';
+import { useLoginForm } from '@/common/hooks';
 
 const SignInPage = () => {
-  const form = useForm<CreateUser>({
-    defaultValues: userSignInDefaultValues,
-    mode: 'all',
-  });
-
-  const { push } = useRouter();
-  const { setUser } = useGlobalStore();
-
-  const login = useRequestHandler(async user => {
-    const { redirection, data, authenticate } = await authProvider.signIn(user);
-    if (authenticate) {
-      cookies.setUser(data);
-      setUser(data);
-    }
-    push(redirection);
-  });
-
-  const handleSubmit = form.handleSubmit((createUser: CreateUser) => {
-    const user = { ...createUser };
-    delete user.confirmPassword;
-    login(user);
-  });
-
+  const { handleSubmit, hookForm, request, router } = useLoginForm();
   return (
     <Layout>
-      <FormProvider {...form}>
+      <FormProvider {...hookForm}>
         <div className='flex justify-center items-center w-screen h-screen bg-white'>
           <div className='flex flex-col mx-2 w-screen rounded-2xl border-none item-center md:w-1/2 lg:w-2/5 2xl:1/4'>
             <h1 className='m-8 text-5xl text-center text-black'>Login</h1>
@@ -49,10 +19,13 @@ const SignInPage = () => {
                 <Input label='Password' name='password' type='password' />
               </div>
               <div className='flex justify-between items-center w-full'>
-                <span className='text-blue-500 cursor-pointer hover:text-blue-700' onClick={() => push('/signup')}>
+                <span
+                  className='text-blue-500 cursor-pointer hover:text-blue-700'
+                  onClick={() => router.push('/sign-up')}
+                >
                   Create an account?
                 </span>{' '}
-                <Button label='Send' type='submit' />
+                <Button label='Send' type='submit' disabled={request.isLoading} />
               </div>
             </form>
           </div>

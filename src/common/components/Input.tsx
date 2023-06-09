@@ -18,15 +18,24 @@ export const Input = (props: InputProps) => {
   const error = errors[name];
   return (
     <div className='relative pb-5 mb-2 w-80'>
-      <input
-        type={type}
-        {...register(name, { validate })}
-        className={getInputClass(!error)}
-        placeholder={label}
-        id={getInputId(name)}
-      />
+      {type === 'textarea' ? (
+        <textarea
+          {...register(name, { validate })}
+          className={getInputClass(!error)}
+          placeholder={label}
+          id={getInputId(name)}
+        />
+      ) : (
+        <input
+          type={type}
+          {...register(name, { validate })}
+          className={getInputClass(!error)}
+          placeholder={label}
+          id={getInputId(name)}
+        />
+      )}
       {!!error && (
-        <span className='absolute right-0 text-end top-14 text-xs text-red-500'>{error.message as string}</span>
+        <span className='absolute right-0 top-14 text-xs text-red-500 text-end'>{error.message as string}</span>
       )}
     </div>
   );

@@ -1,21 +1,26 @@
-import { CreateUser, CreatedUser, DomainUser, RestUser, User } from '@/common/types';
+import { User } from '@/types';
 import { publicRequest } from './request';
-import { LoginUser } from '@/common/types';
 import { cookies } from '@/common/utils';
+import { LoginFormType, SignUpFormType } from '@/common/hooks/form/resolver';
 
 export const authProvider = {
-  signUp: async (user: CreateUser) => {
-    const createdUser: CreatedUser = (await publicRequest().post('/users', user)).data;
-    cookies.setAccessToken(createdUser.user.token || '');
-    return { redirection: '/profile', data: createdUser.user, authenticate: true };
+  signUp: async (user: SignUpFormType) => {
+    const {
+      data: { user: createdUser },
+    } = await publicRequest().post('/users', user);
+
+    cookies.setAccessToken(createdUser.token);
+    cookies.setUser(createdUser);
+
+    return createdUser as User;
   },
-  signIn: async (user: LoginUser) => {
-    const restUser: RestUser = (await publicRequest().post('/users/login', user)).data.user;
-    cookies.setAccessToken(restUser.token || '');
-    return { redirection: '/profile', data: restUser as DomainUser, authenticate: true };
+  signIn: async (credentials: LoginFormType) => {
+    const {
+      data: { user },
+    } = await publicRequest().post('/users/login', credentials);
+    cookies.setAccessToken(user.token);
+    cookies.setUser(user);
+    return user as User;
   },
-  logout: () => {
-    cookies.delete();
-    return { redirection: `/login`, data: null, authenticate: false };
-  },
+  logout: () => cookies.delete(),
 };

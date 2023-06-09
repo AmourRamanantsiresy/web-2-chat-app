@@ -35,6 +35,7 @@ export interface RestUser extends DomainUser {
 
 export interface EditableUser {
   name?: string;
+  email?: string;
   oldPassword: string | number;
   password: string | number;
   bio: string;

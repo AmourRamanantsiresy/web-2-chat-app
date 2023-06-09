@@ -1,41 +1,13 @@
-import { Button, Input, Layout } from '@/common/components';
-import { CreateUser } from '@/common/types';
-import { cookies, printError } from '@/common/utils';
+import { FormProvider } from 'react-hook-form';
+import { useSignUpForm } from '@/common/hooks';
+import { Button, Input } from '@/common/components';
 import { useRouter } from 'next/router';
-import { FormProvider, useForm } from 'react-hook-form';
-import { SignUpSchema, signUpSchema, userSignUpDefaultValues } from './signup/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { authProvider } from '@/providers';
-import { useGlobalStore } from '@/store';
 
 const SignInPage = () => {
-  const form = useForm<SignUpSchema>({
-    defaultValues: userSignUpDefaultValues,
-    mode: 'all',
-    resolver: zodResolver(signUpSchema),
-  });
-
-  const { setUser } = useGlobalStore();
-  const { push } = useRouter();
-
-  const handleSubmit = form.handleSubmit((createUser: CreateUser) => {
-    const signUp = async () => {
-      const user = { ...createUser };
-      delete user.confirmPassword;
-      cookies.setUser(user);
-      const { authenticate, redirection } = await authProvider.signUp(user);
-      if (authenticate) {
-        setUser(user);
-        push(redirection).catch(printError);
-      } else {
-        push(redirection).catch(printError);
-      }
-    };
-    signUp().catch(print);
-  });
+  const { handleSubmit, hookForm, request, router } = useSignUpForm();
 
   return (
-    <FormProvider {...form}>
+    <FormProvider {...hookForm}>
       <div className='flex justify-center items-center w-screen h-screen bg-white'>
         <div className='flex flex-col mx-2 w-screen rounded-2xl border-none item-center md:w-1/2 lg:w-2/5 2xl:1/4'>
           <h1 className='m-8 text-5xl text-center text-black'>SignUp</h1>
@@ -48,10 +20,13 @@ const SignInPage = () => {
             </div>
             <div className='flex justify-end w-full'>
               <div className='flex justify-between items-center w-full'>
-                <span className='text-blue-500 cursor-pointer hover:text-blue-700' onClick={() => push('/login')}>
+                <span
+                  className='text-blue-500 cursor-pointer hover:text-blue-700'
+                  onClick={() => router.push('/login')}
+                >
                   Already have an account?
                 </span>{' '}
-                <Button label='Send' type='submit' />
+                <Button label='Send' type='submit' disabled={request.isLoading} />
               </div>
             </div>
           </form>

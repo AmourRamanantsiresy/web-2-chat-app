@@ -11,4 +11,5 @@ export type ButtonProps = {
   label: string;
   icon?: ReactNode;
   href?: string;
+  disabled?: boolean;
 };

@@ -11,7 +11,7 @@ export const CreateIcon = (props: CreateIconProps) => {
   return (
     <div
       onClick={onClick}
-      className={`flex justify-center p-2 m-1 bg-opacity-20 rounded-full transition-all cursor-pointer item-center hover:bg-opacity-30 ${sx}`}
+      className={`flex justify-center p-2 m-1 bg-opacity-0 rounded-full transition-all cursor-pointer item-center hover:bg-opacity-30 ${sx}`}
     >
       {children}
     </div>

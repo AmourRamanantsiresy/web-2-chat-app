@@ -38,4 +38,8 @@ export class UserProvider {
     } = await this.privateRequest.get('/users');
     return users as UserMin[];
   }
+
+  public async fetcher(action: 'getOne' | 'updateOne' | 'getAll') {
+    return this[action];
+  }
 }

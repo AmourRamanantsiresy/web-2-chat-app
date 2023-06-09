@@ -14,7 +14,7 @@ const Profile = ({ user }: ProfileProps) => {
   return (
     <ProfileLayout>
       <div className='flex justify-start items-start w-full h-hull'>
-        <div className='p-4 w-5/12 h-full bg-white'>
+        <div className='p-4 w-5/12 h-full'>
           <div className='py-6'>
             <h1 className='text-lg'>Informations</h1>
           </div>

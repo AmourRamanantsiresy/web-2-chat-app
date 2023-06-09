@@ -11,7 +11,7 @@ export const useNotify = () => {
       type,
     });
     const timeoutId = setTimeout(() => {
-      setToast(defaultToast);
+      setToast({ ...defaultToast, type: toast.type });
       clearTimeout(timeoutId);
     }, timeout || 3_000);
   };

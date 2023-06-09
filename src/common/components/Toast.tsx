@@ -22,8 +22,14 @@ export const Toast = ({ toast }: ToastProps) => {
 
   return (
     <div
-      style={{ minWidth: '400px', maxWidth: '500px' }}
-      className={`absolute shadow-md rounded-md p-4 right-4 ${getToastStyle(type)} transition-1 ${
+      style={{
+        minWidth: '400px',
+        maxWidth: '500px',
+        transitionTimingFunction: 'ease-in-out',
+        transitionProperty: 'opacity, translate, bottom',
+        transitionDuration: '500ms',
+      }}
+      className={`absolute shadow-md rounded-md p-4 right-4 ${getToastStyle(type)} ${
         isVisible ? 'bottom-12 opacity-1' : 'bottom-0 opacity-0 translate-y-full'
       }`}
     >

@@ -1,4 +1,6 @@
+import { Button } from '@/common/components';
 import { withAuth } from '@/common/utils';
+import { useNotify } from '@/store';
 import { User } from '@/types';
 import { GetServerSidePropsContext } from 'next';
 
@@ -8,7 +10,18 @@ type ProfileProps = {
 };
 
 const Profile = ({ user }: ProfileProps) => {
-  return <div className='w-screen h-screen'></div>;
+  const { notify } = useNotify();
+  return (
+    <div className='w-screen h-screen'>
+      <Button
+        variant='secondary'
+        label='Toast'
+        onClick={() => {
+          notify('Clicked', 'error');
+        }}
+      />
+    </div>
+  );
 };
 
 export default Profile;

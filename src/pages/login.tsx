@@ -4,6 +4,8 @@ import { authProvider } from '@/providers/auth-provider';
 import { useGlobalStore } from '@/store';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
+import { GetServerSidePropsContext } from 'next';
+import { cookies, withAuth } from '@/common/utils';
 
 const userSignInDefaultValues: LoginUser = {
   email: '',
@@ -25,9 +27,8 @@ const SignInPage = () => {
     const login = async () => {
       const { redirection, data, authenticate } = await authProvider.signIn(user);
       if (authenticate) {
+        cookies.setUser(data);
         setUser(data);
-      } else {
-        setErrorMessage(data);
       }
       push(redirection);
     };
@@ -57,6 +58,10 @@ const SignInPage = () => {
       </FormProvider>
     </Layout>
   );
+};
+
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  return withAuth(context);
 };
 
 export default SignInPage;

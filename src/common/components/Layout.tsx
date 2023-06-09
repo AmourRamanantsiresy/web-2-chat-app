@@ -1,17 +1,17 @@
 import { ReactNode } from 'react';
-import { useAuthenticate } from '../hooks';
-import { useModal } from '@/store';
+import { useModal, useNotify } from '@/store';
+import { Toast } from './Toast';
 
 type LayoutProps = {
   children: ReactNode | string;
 };
 
 export const Layout = (props: LayoutProps) => {
-  useAuthenticate();
   const { modalState } = useModal();
+  const { toast } = useNotify();
 
   return (
-    <>
+    <div className='overflow-hidden absolute w-screen h-screen'>
       {props.children}
       <div
         style={modalState && !modalState.isVisible ? { display: 'none' } : {}}
@@ -24,6 +24,7 @@ export const Layout = (props: LayoutProps) => {
       >
         {modalState.content}
       </div>
-    </>
+      <Toast toast={toast} />
+    </div>
   );
 };

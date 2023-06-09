@@ -1,15 +1,13 @@
-import { getCached } from '@/common/utils';
 import axios from 'axios';
 import { BASE_URL } from './base';
 
-export const privateRequest = () => {
-  const accessToken = getCached.accessToken();
+export const privateRequest = (accessToken: string) => {
   if (!accessToken) {
     throw new Error('User is no logged');
   }
   return axios.create({
     headers: {
-      Authorization: `bearer ${getCached.accessToken()}`,
+      Authorization: `bearer ${accessToken}`,
     },
     baseURL: BASE_URL,
   });

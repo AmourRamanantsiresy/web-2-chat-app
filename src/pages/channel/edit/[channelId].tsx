@@ -50,11 +50,6 @@ const CheckboxSelect = ({ users }: CheckboxSelectProps) => {
     form.setValue('members', state ? [...actualMembers, userId] : actualMembers?.filter((e: string) => e !== userId));
   };
 
-  useEffect(() => {
-    console.log(actualMembers);
-    console.log(form.formState.errors);
-  }, [actualMembers]);
-
   return (
     <>
       <div
@@ -98,6 +93,7 @@ const ChannelEdit = ({ user, channelId, users }: ChannelEditProps) => {
 
   return (
     <div className='flex relative justify-center items-center w-screen h-screen'>
+      <h1 className='absolute top-9 left-1/2 text-6xl -translate-x-1/2'>Update channel members</h1>
       <FormProvider {...hookForm}>
         <form className='relative' name='editChannelForm' onSubmit={handleSubmit}>
           <div>

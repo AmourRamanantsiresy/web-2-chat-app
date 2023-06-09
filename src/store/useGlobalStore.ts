@@ -1,6 +1,12 @@
 import { create } from 'zustand';
-import { GlobalStore } from '.';
+import { GlobalStore, Toast } from '.';
 import { produce } from 'immer';
+
+export const defaultToast: Toast = {
+  content: '',
+  isVisible: false,
+  type: 'warning',
+};
 
 export const useGlobalStore = create<GlobalStore>()(set => ({
   setUser(user) {
@@ -31,8 +37,16 @@ export const useGlobalStore = create<GlobalStore>()(set => ({
       })
     );
   },
+  setToast(value) {
+    set(
+      produce((state: GlobalStore) => {
+        state.toast = value;
+      })
+    );
+  },
   user: null,
   errorMessage: '',
   sidebar: true,
   modal: null,
+  toast: defaultToast,
 }));

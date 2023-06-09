@@ -28,7 +28,7 @@ export class ChannelProvider {
   public async addMember(channelId: number, membersIds: number[]) {
     const {
       data: { userAdded },
-    } = await this.privateRequest.post(`/channels/${channelId}`, { members: membersIds });
+    } = await this.privateRequest.post(`/channels/${channelId}/members`, { members: membersIds });
     return userAdded as number[];
   }
 

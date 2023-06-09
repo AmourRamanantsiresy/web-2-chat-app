@@ -88,7 +88,7 @@ const Create = ({ users }: CreateProps) => {
     <div className='flex relative justify-center items-center w-screen h-screen'>
       <h1 className='absolute top-9 left-1/2 text-6xl -translate-x-1/2'>Create channel</h1>
       <FormProvider {...hookForm}>
-        <form className='relative' onSubmit={handleSubmit}>
+        <form className='relative' name='createChannelForm' onSubmit={handleSubmit}>
           <div className='flex w-full'>
             <div>
               <Input label='Name' name='name' />

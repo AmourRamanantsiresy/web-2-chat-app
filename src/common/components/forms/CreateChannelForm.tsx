@@ -6,7 +6,7 @@ export const CreateChannelForm = () => {
   const form = useForm<CreateChannel>({ mode: 'all', defaultValues: { name: '', members: [], type: 'private' } });
   return (
     <FormProvider {...form}>
-      <form>
+      <form name='createChannelForm'>
         <Input label='Channel name' name='name' />
         <SelectMultipleInput<any>
           label='Members'

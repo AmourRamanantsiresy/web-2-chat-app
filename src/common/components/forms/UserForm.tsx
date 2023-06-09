@@ -14,7 +14,7 @@ export const UserForm = ({ user }: UserFromProps) => {
     <div className='p-2 w-2/6'>
       <FormProvider {...hookForm}>
         <h1>Edit my profile</h1>
-        <form onSubmit={handleSubmit} className='flex flex-col mt-5'>
+        <form onSubmit={handleSubmit} name='editProfileForm' className='flex flex-col mt-5'>
           <Input name='name' label='Name' validate={true} />
           <Input name='email' label='Email' validate={true} />
           <Input name='bio' label='Bio' type='textarea' />

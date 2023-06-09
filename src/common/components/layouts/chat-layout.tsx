@@ -1,9 +1,8 @@
-import { Button, CreateIcon, Layout, SendIcon } from '@/common/components';
+import { Button, CreateIcon, Layout } from '@/common/components';
 import { HiUser } from 'react-icons/hi';
-import { NextLayoutProps } from '@/common/types';
+import { BiSend } from 'react-icons/bi';
 import { Message, User } from '@/types';
-import { cookies } from '@/common/utils';
-import { ChangeEvent, useState } from 'react';
+import { useState } from 'react';
 
 const UserIcon = () => (
   <CreateIcon sx='bg-indigo-500'>
@@ -11,12 +10,23 @@ const UserIcon = () => (
   </CreateIcon>
 );
 
+const SendIcon = () => (
+  <CreateIcon sx='bg-indigo-500'>
+    <BiSend color='white' size='25px' />
+  </CreateIcon>
+);
+
 const MessageLayout = ({ message, user }: { message: Message; user: User }) => {
+  const isSender = user.id === message.senderId;
   return (
-    <div className={`w-full flex p-4 ${user.id === message.senderId ? 'justify-end' : 'justify-start'}`}>
-      <h1 style={{ maxWidth: '70%', minWidth: '300px' }} className='p-3 bg-indigo-200 rounded-md text-md text-start'>
-        {message.content}
-      </h1>
+    <div className={`w-full flex p-4 ${isSender ? 'justify-end' : 'justify-start'}`}>
+      <div>
+        <p className={`text-sm text-gray-500 ${isSender && 'text-end'}`}>{message.sender.name}</p>
+        <h1 style={{ maxWidth: '70%', minWidth: '300px' }} className='p-3 bg-indigo-200 rounded-md text-md text-start'>
+          {message.content}
+        </h1>
+        <p className={`text-sm text-gray-500 ${isSender && 'text-end'}`}>{message.updatedAt}</p>
+      </div>
     </div>
   );
 };
@@ -40,9 +50,10 @@ export const ChatLayout = ({
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    Promise.resolve(sendMessage(message)).then(() => {
-      setMessage('');
-    });
+    if (message.length > 0)
+      Promise.resolve(sendMessage(message)).then(() => {
+        setMessage('');
+      });
   };
 
   return (
@@ -68,6 +79,7 @@ export const ChatLayout = ({
             </div>
           </div>
           <form
+            name='sendMessageForm'
             className='flex absolute bottom-0 left-0 justify-around items-center w-full h-16 text-white bg-indigo-300'
             onSubmit={handleSubmit}
           >
@@ -76,8 +88,8 @@ export const ChatLayout = ({
               value={message}
               onChange={handleChange}
             />
-            <button disabled={isLoading} type='submit' className='mx-2'>
-              <SendIcon background='bg-indigo-500' color='white' width='25px' />
+            <button disabled={isLoading || message.length === 0} type='submit' className='mx-2'>
+              <SendIcon />
             </button>
           </form>
         </div>

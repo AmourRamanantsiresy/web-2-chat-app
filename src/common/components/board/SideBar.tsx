@@ -1,38 +1,28 @@
 import { HiPlusCircle, HiUserGroup } from 'react-icons/hi';
 import { MenuItem } from '.';
-import { useState } from 'react';
-import { Modal } from '../Modal';
-import { Button } from '../Button';
-import { CreateChannelForm } from '../forms';
+import { Channel, User } from '@/types';
 
-export const SideBar = () => {
-  const [channelModal, setChannelModal] = useState(false);
+export type Redirection = {
+  name: string;
+  href: string;
+};
 
-  const openChannelModal = () => setChannelModal(true);
-  const closeChannelModal = () => setChannelModal(false);
+type SideBarProps = {
+  values: Redirection[];
+  createChannel?: boolean;
+  title: string;
+};
 
+export const SideBar = ({ title, values, createChannel }: SideBarProps) => {
   return (
     <div className='relative p-4 h-full bg-gray-100 transition-1 w-fit'>
-      <MenuItem icon={<HiUserGroup />} lastMessage='this is the last' name='Name' />
-      <MenuItem icon={<HiUserGroup />} lastMessage='this is the last' name='Name' />
-      <MenuItem icon={<HiUserGroup />} lastMessage='this is the last' name='Name' />
-      <MenuItem icon={<HiUserGroup />} lastMessage='this is the last' name='Name' />
-      <MenuItem icon={<HiUserGroup />} lastMessage='this is the last' name='Name' />
-      <MenuItem onClick={openChannelModal} icon={<HiPlusCircle />} name='Add channel' />
-
-      <Modal open={channelModal}>
-        <div style={{ width: '30rem' }} className=''>
-          <div className='px-1 pb-1 mb-3 w-full border-b'>
-            <p className='text-base'>Add new channel.</p>
-          </div>
-          <div>
-            <CreateChannelForm />
-          </div>
-          <div className='flex justify-end items-end mt-3 w-full'>
-            <Button label='close' onClick={closeChannelModal} />
-          </div>
-        </div>
-      </Modal>
+      <h1 className='text-lg p2'>{title}</h1>
+      <div className='overflow-y-scroll' style={{ height: '51.5vh' }}>
+        {values?.map((v, k) => (
+          <MenuItem icon={<HiUserGroup />} key={`select-user-profile-${v.name}-${k}`} lastMessage='...' {...v} />
+        ))}
+      </div>
+      {createChannel && <MenuItem href='/channel/create' icon={<HiPlusCircle />} name='Create channel' />}
     </div>
   );
 };

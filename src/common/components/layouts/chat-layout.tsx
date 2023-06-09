@@ -54,8 +54,8 @@ export const ChatLayout = ({
             <h1 className='w-full'>{name}</h1>
             <Button href='/profile' variant='secondary' label='Profile' icon={<UserIcon />} />
           </div>
-          <div className='flex overflow-y-auto overflow-x-hidden mb-1 w-full h-5/6'>
-            <div style={{ minWidth: '100%' }} className='p-9 my-2 w-full bg-gray-100 rounded'>
+          <div className='flex overflow-x-hidden overflow-y-scroll mb-1 w-full h-5/6 bg-gray-100'>
+            <div style={{ minWidth: '100%' }} className='p-9 my-2 w-full'>
               {messages.length === 0 && (
                 <div className='flex justify-center items-center w-full h-full'>
                   <h1 className='text-2xl opacity-50 select-none'>Say Hello first</h1>

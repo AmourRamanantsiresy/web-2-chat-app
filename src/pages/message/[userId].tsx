@@ -49,6 +49,7 @@ const User = ({ recipientId, user }: ChannelProp) => {
 
   return (
     <ChatLayout
+      type='user'
       isLoading={getMessageRequest.isLoading || sendMessageRequest.isMutating}
       sendMessage={sendMessage}
       user={user}

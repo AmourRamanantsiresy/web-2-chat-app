@@ -53,6 +53,8 @@ const Channel = ({ error, currentChannel, user }: ChannelProp) => {
 
   return (
     <ChatLayout
+      type='channel'
+      id={currentChannel?.id || 0}
       isLoading={getMessageRequest.isLoading || sendMessageRequest.isMutating}
       sendMessage={sendMessage}
       user={user}

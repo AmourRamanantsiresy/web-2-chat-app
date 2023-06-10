@@ -1,12 +1,17 @@
 import { Button, CreateIcon, Layout } from '@/common/components';
 import { HiUser } from 'react-icons/hi';
-import { BiSend } from 'react-icons/bi';
+import { BiEdit, BiSend } from 'react-icons/bi';
 import { Message, User } from '@/types';
 import { useState } from 'react';
 
 const UserIcon = () => (
   <CreateIcon sx='bg-indigo-500'>
     <HiUser color='white' />
+  </CreateIcon>
+);
+const EditIcon = () => (
+  <CreateIcon sx='bg-indigo-500'>
+    <BiEdit color='white' />
   </CreateIcon>
 );
 
@@ -31,19 +36,17 @@ const MessageLayout = ({ message, user }: { message: Message; user: User }) => {
   );
 };
 
-export const ChatLayout = ({
-  name,
-  messages,
-  user,
-  sendMessage,
-  isLoading,
-}: {
+type ChatLayoutProps = {
   name: string;
   messages: Message[];
   user: User;
   sendMessage: (e: any) => any;
   isLoading: boolean;
-}) => {
+  type: 'channel' | 'user';
+  id?: number;
+};
+
+export const ChatLayout = ({ name, messages, user, sendMessage, isLoading, type, id }: ChatLayoutProps) => {
   const [message, setMessage] = useState('');
 
   const handleChange = (e: any) => setMessage(e.target.value);
@@ -63,7 +66,8 @@ export const ChatLayout = ({
         <div className='overflow-hidden absolute top-1/2 left-1/2 p-4 w-4/6 h-5/6 bg-white rounded shadow-md -translate-x-1/2 -translate-y-1/2'>
           <div className='flex justify-end items-center w-full'>
             <h1 className='w-full'>{name}</h1>
-            <Button href='/profile' variant='secondary' label='Profile' icon={<UserIcon />} />
+            {id && <Button href={`/channel/edit/${id}`} variant='secondary' label='Edit' icon={<EditIcon />} />}
+            <Button href='/profile' variant='primary' label='Profile' icon={<UserIcon />} />
           </div>
           <div className='flex overflow-x-hidden overflow-y-scroll mb-1 w-full h-5/6 bg-gray-100'>
             <div style={{ minWidth: '100%' }} className='p-9 my-2 w-full'>

@@ -2,6 +2,7 @@ import { EditableUser } from '@/common/types';
 import { AxiosInstance } from 'axios';
 import { privateRequest } from './request';
 import { User, UserMin } from '@/types';
+import { cookies } from '@/common/utils';
 
 export class UserProvider {
   private privateRequest: AxiosInstance;
@@ -32,11 +33,11 @@ export class UserProvider {
     return user as User;
   }
 
-  public async getAll() {
+  public async getAll(id?: number) {
     const {
       data: { users },
     } = await this.privateRequest.get('/users');
-    return users as UserMin[];
+    return (users as UserMin[]).filter(user => user.id !== id || -1);
   }
 
   public async fetcher(action: 'getOne' | 'updateOne' | 'getAll') {

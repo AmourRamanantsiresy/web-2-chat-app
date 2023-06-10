@@ -46,6 +46,8 @@ type ChatLayoutProps = {
   id?: number;
 };
 
+export const ProfileButton = () => <Button href='/profile' variant='primary' label='Profile' icon={<UserIcon />} />;
+
 export const ChatLayout = ({ name, messages, user, sendMessage, isLoading, type, id }: ChatLayoutProps) => {
   const [message, setMessage] = useState('');
 
@@ -67,7 +69,7 @@ export const ChatLayout = ({ name, messages, user, sendMessage, isLoading, type,
           <div className='flex justify-end items-center w-full'>
             <h1 className='w-full'>{name}</h1>
             {id && <Button href={`/channel/edit/${id}`} variant='secondary' label='Edit' icon={<EditIcon />} />}
-            <Button href='/profile' variant='primary' label='Profile' icon={<UserIcon />} />
+            <ProfileButton />
           </div>
           <div className='flex overflow-x-hidden overflow-y-scroll mb-1 w-full h-5/6 bg-gray-100'>
             <div style={{ minWidth: '100%' }} className='p-9 my-2 w-full'>

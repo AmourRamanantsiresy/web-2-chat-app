@@ -12,7 +12,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
   return withAuth(context, async user => {
     const userApi = UserProvider.api(user.token);
     const channelApi = ChannelProvider.api(user.token);
-    const users = await userApi.getAll();
+    const users = await userApi.getAll(user.id);
     const channels = await channelApi.getAll();
 
     return {

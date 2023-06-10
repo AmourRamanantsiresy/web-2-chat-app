@@ -1,4 +1,4 @@
-import { Button, CreateIcon, Input } from '@/common/components';
+import { Button, CreateIcon, Input, ProfileButton } from '@/common/components';
 import { CreateChannelForm } from '@/common/hooks';
 import { useCreateChannelForm } from '@/common/hooks/form/use-create-channel-form';
 import { withAuth } from '@/common/utils';
@@ -19,7 +19,7 @@ export const getServerSideProps: GetServerSideProps = async context => {
   return withAuth(context, async user => {
     const channelId: any = context.params?.channelId || '';
     const userApi = UserProvider.api(user.token);
-    const users = await userApi.getAll();
+    const users = await userApi.getAll(user.id);
 
     return {
       props: {
@@ -106,7 +106,10 @@ const Create = ({ users }: CreateProps) => {
               <CheckboxSelect users={users} />
             </div>
           </div>
-          <CustomButton isLoading={request.isLoading} />
+          <div className='flex'>
+            <CustomButton isLoading={request.isLoading} />
+            <ProfileButton />
+          </div>
         </form>
       </FormProvider>
     </div>

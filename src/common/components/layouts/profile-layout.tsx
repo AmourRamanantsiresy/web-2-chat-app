@@ -14,7 +14,11 @@ const LogoutIcon = () => (
   </CreateIcon>
 );
 
-export const ProfileLayout = ({ children, sideBar }: NextLayoutProps & { sideBar: ReactNode }) => {
+export const ProfileLayout = ({
+  children,
+  sideBarL,
+  sideBarR,
+}: NextLayoutProps & { sideBarL: ReactNode; sideBarR: ReactNode }) => {
   const { push } = useRouter();
 
   const handleLogout = () => {
@@ -31,8 +35,9 @@ export const ProfileLayout = ({ children, sideBar }: NextLayoutProps & { sideBar
             <Button onClick={handleLogout} variant='primary' label='Logout' icon={<LogoutIcon />} />
           </div>
           <div className='flex w-full'>
-            <div className='m-2 h-full'>{sideBar}</div>
+            <div className='m-2 h-full'>{sideBarL}</div>
             <div className='p-9 my-2 w-full h-full bg-gray-100 rounded'>{children}</div>
+            <div className='m-2 h-full'>{sideBarR}</div>
           </div>
           <div className='flex absolute bottom-0 left-0 justify-center items-center w-full h-16 text-white bg-indigo-300'>
             <h1>Copyright ®</h1>

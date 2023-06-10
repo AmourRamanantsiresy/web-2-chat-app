@@ -33,7 +33,10 @@ type ProfileProps = {
 const Profile = ({ user, channels, users }: ProfileProps) => {
   const { bio, email, name } = user;
   return (
-    <ProfileLayout sideBar={<SideBar title='Channels' createChannel={true} values={channels} />}>
+    <ProfileLayout
+      sideBarL={<SideBar title='Channels' createChannel={true} values={channels} />}
+      sideBarR={<SideBar title='Users' createChannel={false} values={users} />}
+    >
       <div className='flex justify-start items-start w-full h-hull'>
         <div className='p-4 w-5/12 h-full'>
           <div className='py-6'>
